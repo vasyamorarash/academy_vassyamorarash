@@ -1,4 +1,3 @@
 academy_vassyamorarash
 ======================
-
-Repository for PHP
+Морараш Василь Михайлович
