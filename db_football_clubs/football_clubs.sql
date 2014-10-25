@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Окт 24 2014 г., 21:37
+-- Время создания: Окт 25 2014 г., 15:55
 -- Версия сервера: 5.5.25
 -- Версия PHP: 5.3.13
 
@@ -23,32 +23,28 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `club`
+-- Структура таблицы `clubs`
 --
 
-CREATE TABLE IF NOT EXISTS `club` (
+CREATE TABLE IF NOT EXISTS `clubs` (
   `id` int(4) unsigned NOT NULL AUTO_INCREMENT,
   `name` char(50) NOT NULL,
-  `town` char(40) NOT NULL,
-  `country` char(30) NOT NULL,
+  `town_id` int(4) unsigned NOT NULL,
+  `country_id` int(4) unsigned NOT NULL,
   `year` int(11) NOT NULL,
   `annual_budget` bigint(20) NOT NULL,
-  `president_name` char(30) NOT NULL,
-  `home_stadion_id` int(4) unsigned NOT NULL,
+  `president_id` int(4) unsigned NOT NULL,
+  `home_stadium_id` int(4) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`),
   UNIQUE KEY `id_2` (`id`),
   UNIQUE KEY `id_3` (`id`),
   UNIQUE KEY `id_4` (`id`),
-  KEY `home_stadion_id` (`home_stadion_id`)
+  KEY `home_stadion_id` (`home_stadium_id`),
+  KEY `town_id` (`town_id`),
+  KEY `country_id` (`country_id`),
+  KEY `president_id` (`president_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
---
--- Дамп данных таблицы `club`
---
-
-INSERT INTO `club` (`id`, `name`, `town`, `country`, `year`, `annual_budget`, `president_name`, `home_stadion_id`) VALUES
-(1, 'Манчестер Юнайтед', 'Манчестер', 'Англія', 1878, 200000000, 'Эд Вудворд', 1);
 
 -- --------------------------------------------------------
 
@@ -66,13 +62,6 @@ CREATE TABLE IF NOT EXISTS `clubs_leagues` (
   KEY `league_id` (`league_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
---
--- Дамп данных таблицы `clubs_leagues`
---
-
-INSERT INTO `clubs_leagues` (`id`, `club_id`, `league_id`) VALUES
-(1, 1, 2);
-
 -- --------------------------------------------------------
 
 --
@@ -83,6 +72,7 @@ CREATE TABLE IF NOT EXISTS `clubs_trophys` (
   `id` int(4) unsigned NOT NULL AUTO_INCREMENT,
   `club_id` int(4) unsigned NOT NULL,
   `trophy_id` int(4) unsigned NOT NULL,
+  `count` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`),
   UNIQUE KEY `id_2` (`id`),
@@ -90,21 +80,27 @@ CREATE TABLE IF NOT EXISTS `clubs_trophys` (
   KEY `trophy_id` (`trophy_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
+-- --------------------------------------------------------
+
 --
--- Дамп данных таблицы `clubs_trophys`
+-- Структура таблицы `countrys`
 --
 
-INSERT INTO `clubs_trophys` (`id`, `club_id`, `trophy_id`) VALUES
-(1, 1, 1),
-(2, 1, 4);
+CREATE TABLE IF NOT EXISTS `countrys` (
+  `id` int(4) unsigned NOT NULL AUTO_INCREMENT,
+  `name` char(30) NOT NULL,
+  `population` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `league`
+-- Структура таблицы `leagues`
 --
 
-CREATE TABLE IF NOT EXISTS `league` (
+CREATE TABLE IF NOT EXISTS `leagues` (
   `id` int(4) unsigned NOT NULL AUTO_INCREMENT,
   `name` char(40) NOT NULL,
   `country` char(30) NOT NULL,
@@ -115,21 +111,27 @@ CREATE TABLE IF NOT EXISTS `league` (
   UNIQUE KEY `id_2` (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
+-- --------------------------------------------------------
+
 --
--- Дамп данных таблицы `league`
+-- Структура таблицы `presidents`
 --
 
-INSERT INTO `league` (`id`, `name`, `country`, `rating_uefa`, `president_name`) VALUES
-(2, 'Премьер-лига', 'Англия', 2, 'Дэвид Ричардс'),
-(3, 'Ла Лига', 'Испания', 1, 'Хосе Луис Астиасаран');
+CREATE TABLE IF NOT EXISTS `presidents` (
+  `id` int(4) unsigned NOT NULL AUTO_INCREMENT,
+  `name` char(30) NOT NULL,
+  `birthday` date NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `stadium`
+-- Структура таблицы `stadiums`
 --
 
-CREATE TABLE IF NOT EXISTS `stadium` (
+CREATE TABLE IF NOT EXISTS `stadiums` (
   `id` int(4) unsigned NOT NULL AUTO_INCREMENT,
   `name` char(40) NOT NULL,
   `year` int(11) NOT NULL,
@@ -139,21 +141,30 @@ CREATE TABLE IF NOT EXISTS `stadium` (
   UNIQUE KEY `id_2` (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
+-- --------------------------------------------------------
+
 --
--- Дамп данных таблицы `stadium`
+-- Структура таблицы `towns`
 --
 
-INSERT INTO `stadium` (`id`, `name`, `year`, `capacity`) VALUES
-(1, 'Олд Траффорд', 1910, 75765),
-(2, 'Камп Ноу', 1957, 99354);
+CREATE TABLE IF NOT EXISTS `towns` (
+  `id` int(4) unsigned NOT NULL AUTO_INCREMENT,
+  `name` char(30) NOT NULL,
+  `country_id` int(4) unsigned NOT NULL,
+  `population` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  KEY `country_id` (`country_id`),
+  KEY `country_id_2` (`country_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `trophy`
+-- Структура таблицы `trophys`
 --
 
-CREATE TABLE IF NOT EXISTS `trophy` (
+CREATE TABLE IF NOT EXISTS `trophys` (
   `id` int(4) unsigned NOT NULL AUTO_INCREMENT,
   `name` char(40) NOT NULL,
   `year` int(11) NOT NULL,
@@ -163,38 +174,37 @@ CREATE TABLE IF NOT EXISTS `trophy` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
--- Дамп данных таблицы `trophy`
---
-
-INSERT INTO `trophy` (`id`, `name`, `year`) VALUES
-(1, 'Кубок Англии', 1871),
-(2, 'Кубок Футбольной лиги', 1960),
-(3, 'Ла Лига', 1929),
-(4, 'Премьер-лига', 1992);
-
---
 -- Ограничения внешнего ключа сохраненных таблиц
 --
 
 --
--- Ограничения внешнего ключа таблицы `club`
+-- Ограничения внешнего ключа таблицы `clubs`
 --
-ALTER TABLE `club`
-  ADD CONSTRAINT `club_ibfk_2` FOREIGN KEY (`home_stadion_id`) REFERENCES `stadium` (`id`);
+ALTER TABLE `clubs`
+  ADD CONSTRAINT `clubs_ibfk_4` FOREIGN KEY (`home_stadium_id`) REFERENCES `stadiums` (`id`),
+  ADD CONSTRAINT `clubs_ibfk_1` FOREIGN KEY (`town_id`) REFERENCES `towns` (`id`),
+  ADD CONSTRAINT `clubs_ibfk_2` FOREIGN KEY (`country_id`) REFERENCES `countrys` (`id`),
+  ADD CONSTRAINT `clubs_ibfk_3` FOREIGN KEY (`president_id`) REFERENCES `presidents` (`id`);
 
 --
 -- Ограничения внешнего ключа таблицы `clubs_leagues`
 --
 ALTER TABLE `clubs_leagues`
-  ADD CONSTRAINT `clubs_leagues_ibfk_2` FOREIGN KEY (`league_id`) REFERENCES `league` (`id`),
-  ADD CONSTRAINT `clubs_leagues_ibfk_1` FOREIGN KEY (`club_id`) REFERENCES `club` (`id`);
+  ADD CONSTRAINT `clubs_leagues_ibfk_3` FOREIGN KEY (`club_id`) REFERENCES `clubs` (`id`),
+  ADD CONSTRAINT `clubs_leagues_ibfk_2` FOREIGN KEY (`league_id`) REFERENCES `leagues` (`id`);
 
 --
 -- Ограничения внешнего ключа таблицы `clubs_trophys`
 --
 ALTER TABLE `clubs_trophys`
-  ADD CONSTRAINT `clubs_trophys_ibfk_2` FOREIGN KEY (`trophy_id`) REFERENCES `trophy` (`id`),
-  ADD CONSTRAINT `clubs_trophys_ibfk_1` FOREIGN KEY (`club_id`) REFERENCES `club` (`id`);
+  ADD CONSTRAINT `clubs_trophys_ibfk_3` FOREIGN KEY (`club_id`) REFERENCES `clubs` (`id`),
+  ADD CONSTRAINT `clubs_trophys_ibfk_2` FOREIGN KEY (`trophy_id`) REFERENCES `trophys` (`id`);
+
+--
+-- Ограничения внешнего ключа таблицы `towns`
+--
+ALTER TABLE `towns`
+  ADD CONSTRAINT `towns_ibfk_1` FOREIGN KEY (`country_id`) REFERENCES `countrys` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
