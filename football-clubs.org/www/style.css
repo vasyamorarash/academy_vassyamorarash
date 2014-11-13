@@ -1,0 +1,83 @@
+body{
+	background: url("body_background.jpg");
+}
+div.main{	
+	border: 2 double #373;
+	background: #9b9;
+	font: 16px verdana;
+	color: #232;
+	margin-left: 10px;
+	margin-right: 10px;
+	min-width: 1300px;
+}
+div.header{
+	border: 2 double #373;
+	background: #8a8;
+	padding: auto;
+	margin: 20px 10px 10px 10px;
+	height: 90px;
+}
+div.menu{
+	border: 2 double #373;
+	background: #8a8;
+	padding: 10px;
+	margin: 10px;
+	width: 180px;
+	float: left;	
+}
+div.content{
+	border: 2 double #373;
+	background: #8a8;
+	padding: 10px;	
+	margin: 20px 10px 20px 235px;	
+}
+div.footer{
+	padding: 10px;
+	margin: 10px 10px 10px 235px;
+	text-align: center;
+}
+div.logo-left{
+	float: left;
+	width: 240px;
+}
+div.header-text{
+	margin-left: 200px;
+	text-align: center;
+	font: 65 Palatino Linotype;
+}
+div.input{
+	border: 2 groove #232;
+	padding: 10px;
+}
+div.delete{	
+	border: 2 groove #232;
+	padding: 10px;
+}
+hr{
+	border: 3 double #232;
+}
+a.menu{
+	display: block;
+	color: #232;
+	text-decoration: none;
+}
+a.menu:hover{
+	background: #232;
+	color: #9b9;
+}
+table{
+   	width: 100%;
+   	border: 2 groove #232;
+   	padding: 10px;
+   	font: 16px verdana;
+	color: #232;
+}
+th{
+   	border: 3 double #373;
+   	padding: 10px;
+} 
+td{
+   	border: 3 double #373;
+   	padding: 10px;
+   	text-align: center;
+}
