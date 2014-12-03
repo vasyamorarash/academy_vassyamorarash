@@ -1,0 +1,45 @@
+<?php echo $this->doctype() ?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <?php echo $this->headMeta();?>
+  <?php echo $this->headTitle();?>
+  <?php echo $this->headLink()->appendStylesheet(
+    $this->baseUrl() . '/css/blueprint/screen.css', 'screen'
+  ); ?>
+  <?php echo $this->headLink()->appendStylesheet(
+      $this->baseUrl() . '/css/blueprint/print.css', 'print'
+  ); ?>
+  <?php echo $this->headLink()->appendStylesheet(
+      $this->baseUrl() . '/css/blueprint/style.css', 'screen'
+  ); ?>
+  <?php echo '<link rel="shortcut icon" href="' .  $this->baseUrl() . '/images/football-icon.png" type="image/png"/>'; ?>
+</head>
+<body>
+    <div id="main">
+      <div id="header">
+                <div id="logo-left">
+                    <a href="http://www.football-clubs.org/"><img src="<?php echo $this->baseUrl() . '/images/logo-left.png' ?>" /></a>
+                </div>
+                <div id="header-text">
+                    <?php echo $this->title;?>
+                </div>
+      </div>
+      <div id="menu">
+        <a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'clubs', 'action' => 'index'), 'default'); ?>"
+           id="menu" >Clubs</a>
+        <a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'leagues', 'action' => 'index'), 'default'); ?>" id="menu" >Leagues</a>
+        <a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'stadiums', 'action' => 'index'), 'default'); ?>" id="menu" >Stadiums</a>
+        <a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'trophies', 'action' => 'index'), 'default'); ?>" id="menu" >Trophies</a>
+      </div>
+      <div id="content">
+
+        <?php echo $this->layout()->content; ?>
+        
+      </div>
+      <div id="footer">
+                <hr/>
+                <h5>&copy; All rights reserved 2014</h5>
+      </div>
+    </div>
+  </body>
+</html>

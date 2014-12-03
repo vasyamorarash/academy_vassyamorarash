@@ -1,0 +1,52 @@
+<a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'clubs', 'action' => 'add'), 'default'); ?>"
+   id="menu" >Add Clubs</a>
+<a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'clubs', 'action' => 'delete'), 'default'); ?>"
+   id="menu" >Delete Clubs</a><br/>
+<?php echo $this->formSearch; ?>
+<?php
+    //print_r($this->clubs);
+    if (count($this->clubs)) {
+        ?>
+        <table>
+            <tr>
+                <th><a href="
+                    <?php echo $this->url(array('module' => 'default', 'controller' => 'clubs', 'action' => 'index'), 'default')
+                        . '?sort=club_name'; ?>" id="sort" >Club Name</a></th>
+                <th><a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'clubs', 'action' => 'index'), 'default')
+                        . '?sort=town_name'; ?>" id="sort" >Town</a></th>
+                <th><a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'clubs', 'action' => 'index'), 'default')
+                        . '?sort=country_name'; ?>" id="sort" >Country</a></th>
+                <th>Leagues</th>
+                <th><a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'clubs', 'action' => 'index'), 'default')
+                        . '?sort=club_year'; ?>" id="sort" >Year</a></th>
+                <th>Count Of Trophies</th>
+                <th><a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'clubs', 'action' => 'index'), 'default')
+                        . '?sort=annual_budget'; ?>" id="sort" >Annual Budget</a></th>
+                <th><a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'clubs', 'action' => 'index'), 'default')
+                        . '?sort=president_name'; ?>" id="sort" >President</a></th>
+                <th><a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'clubs', 'action' => 'index'), 'default')
+                        . '?sort=stadium_name'; ?>" id="sort" >Stadium</a></th>
+            </tr>
+            <?php
+            foreach ($this->clubs as $c) {
+                echo "<tr>";
+                echo "<td>" . $c->club_name . "</td>";
+                echo "<td>" . $c->town_name . "</td>";
+                echo "<td>" . $c->country_name . "</td>";
+                $league = $this->club->getLeaguesById($c->club_id);
+                echo "<td>" . $league . "</td>";
+                echo "<td>" . $c->club_year . "</td>";
+                $count = $this->club->getCountOfTrophies($c->club_id);
+                echo "<td>" . $count . "</td>";
+                echo "<td>" . $c->annual_budget . "</td>";
+                echo "<td>" . $c->president_name . "</td>";
+                echo "<td>" . $c->stadium_name . "</td>";
+                echo "</tr>";
+            }
+            ?>
+        </table>
+    <?php
+    }else{
+        echo "<p>No Clubs</p>";
+    }
+

@@ -1,0 +1,39 @@
+<?= $this->searchClubsForm; ?>
+<?php
+if (count($this->clubs)) {
+    ?>
+    <table>
+        <tr>
+            <th>Clubs</th>
+        <?php
+        foreach ($this->clubs as $c) {
+            echo "<tr>";
+            echo "<td>" . $c->club_name . "</td>";
+            echo "</tr>";
+        }
+        ?>
+    </table>
+<?php
+}else{
+    echo "<p>No Clubs</p>";
+}
+?>
+<?= $this->searchTrophiesForm; ?>
+<?php
+if (count($this->trophies)) {
+    ?>
+    <table>
+        <tr>
+            <th>Trophies</th>
+            <?php
+            foreach ($this->trophies as $t) {
+                echo "<tr>";
+                echo "<td>" . $t->trophy_name . "</td>";
+                echo "</tr>";
+            }
+            ?>
+    </table>
+<?php
+}else{
+    echo "<p>No Trophies</p>";
+}

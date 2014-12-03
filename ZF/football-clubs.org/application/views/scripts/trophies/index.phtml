@@ -1,0 +1,35 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Vassya
+ * Date: 29.11.2014
+ * Time: 21:08
+ */
+?>
+<a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'trophies', 'action' => 'add'), 'default')?>" id="menu" >Add Trophies</a>
+<a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'trophies', 'action' => 'delete'), 'default')?>" id="menu" >Delete Trophies</a>
+<?= $this->formSearch; ?>
+<?php
+if (count($this->trophy)) {
+    ?>
+    <table>
+        <tr>
+            <th><a href="
+                    <?php echo $this->url(array('module' => 'default', 'controller' => 'trophies', 'action' => 'index'), 'default')
+                    . '?sort=name'; ?>" id="sort" >Trophy Name</a></th>
+            <th><a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'trophies', 'action' => 'index'), 'default')
+                    . '?sort=year'; ?>" id="sort" >Year</a></th>
+        </tr>
+        <?php
+        foreach ($this->trophy as $t) {
+            echo "<tr>";
+            echo "<td>" . $t->name . "</td>";
+            echo "<td>" . $t->year . "</td>";
+            echo "</tr>";
+        }
+        ?>
+    </table>
+<?php
+}else{
+    echo "<p>No Trophies</p>";
+}
